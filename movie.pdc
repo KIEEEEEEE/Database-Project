@@ -1,0 +1,36 @@
+-- Create table
+create table MOVIE
+(
+  movie_id    CHAR(10) not null,
+  movie_name  VARCHAR2(40) not null,
+  director    VARCHAR2(20),
+  cast        VARCHAR2(500),
+  duration    VARCHAR2(15),
+  description VARCHAR2(1000)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table MOVIE
+  add constraint MOVIEPK primary key (MOVIE_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

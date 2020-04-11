@@ -1,0 +1,36 @@
+-- Create table
+create table STAFF
+(
+  staff_id     VARCHAR2(15) not null,
+  staff_name   VARCHAR2(20) not null,
+  staff_gender CHAR(1) not null,
+  staff_email  VARCHAR2(40) not null,
+  staff_phone  VARCHAR2(11) not null,
+  staff_pwd    VARCHAR2(15) not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table STAFF
+  add constraint STAFFPK primary key (STAFF_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

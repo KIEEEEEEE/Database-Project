@@ -1,0 +1,39 @@
+-- Create table
+create table SCREENING
+(
+  theater_id       CHAR(2) not null,
+  num_seats        CHAR(3) not null,
+  movie_time       DATE,
+  movie_id         CHAR(10),
+  screening_id     CHAR(15) not null,
+  screening_status CHAR(2) default 0
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SCREENING
+  add constraint THEATERPK primary key (SCREENING_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table SCREENING
+  add constraint THEATERFK foreign key (MOVIE_ID)
+  references MOVIE (MOVIE_ID);

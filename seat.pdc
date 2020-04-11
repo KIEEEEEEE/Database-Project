@@ -1,0 +1,33 @@
+-- Create table
+create table SEAT
+(
+  seat_id     VARCHAR2(3) not null,
+  theater_id  CHAR(2) not null,
+  seat_status CHAR(1) default 0 not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SEAT
+  add constraint SEATPK primary key (SEAT_ID, THEATER_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

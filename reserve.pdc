@@ -1,0 +1,45 @@
+-- Create table
+create table RESERVE
+(
+  screening_id   CHAR(15) not null,
+  seat_id        VARCHAR2(3) not null,
+  customer_id    VARCHAR2(15) not null,
+  reserve_status CHAR(1) default 0 not null,
+  theater_id     CHAR(2) not null,
+  reserve_id     NUMBER not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table RESERVE
+  add constraint RESERVEPK primary key (RESERVE_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table RESERVE
+  add constraint RESERVEFK1 foreign key (SCREENING_ID)
+  references SCREENING (SCREENING_ID);
+alter table RESERVE
+  add constraint RESERVEFK2 foreign key (SEAT_ID, THEATER_ID)
+  references SEAT (SEAT_ID, THEATER_ID);
+alter table RESERVE
+  add constraint RESERVEFK3 foreign key (CUSTOMER_ID)
+  references CUSTOMER (CUSTOMER_ID);
